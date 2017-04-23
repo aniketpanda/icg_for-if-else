@@ -1,0 +1,3029 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> start_state
+Rule 1     start_state -> INT ID OPBRAC CLOSEBRAC stmts
+Rule 2     iter_stmt -> X Y Z
+Rule 3     X -> IF OPBRAC cond_stmt CLOSEBRAC
+Rule 4     Y -> stmts
+Rule 5     Z -> ELSE stmts stmts
+Rule 6     Z -> <empty>
+Rule 7     stmts -> OPENFLR stmts CLOSEFLR
+Rule 8     stmts -> iter_stmt
+Rule 9     stmts -> expr_stmt STATETER stmts
+Rule 10    stmts -> printing STATETER stmts
+Rule 11    stmts -> assignment STATETER stmts
+Rule 12    stmts -> decfloat STATETER stmts
+Rule 13    stmts -> declareint STATETER stmts
+Rule 14    stmts -> math stmts
+Rule 15    stmts -> newone stmts
+Rule 16    stmts -> <empty>
+Rule 17    newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts
+Rule 18    newone -> ID ASSIGN ID PLUS ID STATETER stmts
+Rule 19    newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts
+Rule 20    newone -> ID ASSIGN ID MINUS ID STATETER stmts
+Rule 21    expr_stmt -> assignment_int
+Rule 22    expr_stmt -> declare
+Rule 23    assignment_int -> INT ID ASSIGN NUMBER followint
+Rule 24    assignment_int -> INT ID followint
+Rule 25    followint -> COMMA ID ASSIGN NUMBER followint
+Rule 26    followint -> COMMA ID followint
+Rule 27    followint -> <empty>
+Rule 28    assignment -> FLOAT ID ASSIGN NUMBER followfloat
+Rule 29    assignment -> FLOAT ID followfloat
+Rule 30    followfloat -> COMMA ID ASSIGN NUMBER followfloat
+Rule 31    followfloat -> COMMA ID followfloat
+Rule 32    followfloat -> <empty>
+Rule 33    assignment -> CHAR ID ASSIGN NUMBER follow
+Rule 34    declare -> ID ASSIGN NUMBER followint
+Rule 35    declareint -> ID ASSIGN NUMBER
+Rule 36    decfloat -> ID ASSIGN NUMBER
+Rule 37    cond_stmt -> ID RELOP ID
+Rule 38    cond_stmt -> ID RELOP NUMBER
+Rule 39    cond_stmt -> NUMBER RELOP ID
+Rule 40    cond_stmt -> NUMBER RELOP NUMBER
+Rule 41    cond_stmt -> cond_stmt LOGOP cond_stmt
+Rule 42    cond_stmt -> <empty>
+Rule 43    math -> ID PLUS ASSIGN NUMBER STATETER
+Rule 44    math -> ID PLUS ASSIGN ID STATETER
+Rule 45    math -> ID MINUS ASSIGN NUMBER STATETER
+Rule 46    math -> ID MINUS ASSIGN ID STATETER
+Rule 47    math -> ID AOP ASSIGN NUMBER STATETER
+Rule 48    math -> ID AOP ASSIGN ID STATETER
+Rule 49    math -> PLUS PLUS ID STATETER
+Rule 50    math -> ID PLUS PLUS STATETER
+Rule 51    math -> MINUS MINUS ID STATETER
+Rule 52    math -> ID MINUS MINUS STATETER
+Rule 53    printing -> PRINT
+Rule 54    printing -> PRINTF OPBRAC STRLIT follow CLOSEBRAC
+Rule 55    follow -> COMMA ID follow
+Rule 56    follow -> <empty>
+
+Terminals, with rules where they appear
+
+AOP                  : 47 48
+ASSIGN               : 17 18 19 20 23 25 28 30 33 34 35 36 43 44 45 46 47 48
+CHAR                 : 33
+CLOSEBRAC            : 1 3 54
+CLOSEFLR             : 7
+COMMA                : 25 26 30 31 55
+ELSE                 : 5
+FLOAT                : 28 29
+ID                   : 1 17 17 18 18 18 19 19 20 20 20 23 24 25 26 28 29 30 31 33 34 35 36 37 37 38 39 43 44 44 45 46 46 47 48 48 49 50 51 52 55
+IF                   : 3
+INT                  : 1 23 24
+LOGOP                : 41
+MINUS                : 19 20 45 46 51 51 52 52
+NUMBER               : 17 19 23 25 28 30 33 34 35 36 38 39 40 40 43 45 47
+OPBRAC               : 1 3 54
+OPENFLR              : 7
+PLUS                 : 17 18 43 44 49 49 50 50
+PRINT                : 53
+PRINTF               : 54
+RELOP                : 37 38 39 40
+STATETER             : 9 10 11 12 13 17 18 19 20 43 44 45 46 47 48 49 50 51 52
+STRLIT               : 54
+error                : 
+
+Nonterminals, with rules where they appear
+
+X                    : 2
+Y                    : 2
+Z                    : 2
+assignment           : 11
+assignment_int       : 21
+cond_stmt            : 3 41 41
+decfloat             : 12
+declare              : 22
+declareint           : 13
+expr_stmt            : 9
+follow               : 33 54 55
+followfloat          : 28 29 30 31
+followint            : 23 24 25 26 34
+iter_stmt            : 8
+math                 : 14
+newone               : 15
+printing             : 10
+start_state          : 0
+stmts                : 1 4 5 5 7 9 10 11 12 13 14 15 17 18 19 20
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . start_state
+    (1) start_state -> . INT ID OPBRAC CLOSEBRAC stmts
+
+    INT             shift and go to state 2
+
+    start_state                    shift and go to state 1
+
+state 1
+
+    (0) S' -> start_state .
+
+
+
+state 2
+
+    (1) start_state -> INT . ID OPBRAC CLOSEBRAC stmts
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) start_state -> INT ID . OPBRAC CLOSEBRAC stmts
+
+    OPBRAC          shift and go to state 4
+
+
+state 4
+
+    (1) start_state -> INT ID OPBRAC . CLOSEBRAC stmts
+
+    CLOSEBRAC       shift and go to state 5
+
+
+state 5
+
+    (1) start_state -> INT ID OPBRAC CLOSEBRAC . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+    OPENFLR         shift and go to state 21
+    $end            reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 11
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 6
+
+    (13) stmts -> declareint . STATETER stmts
+
+    STATETER        shift and go to state 28
+
+
+state 7
+
+    (33) assignment -> CHAR . ID ASSIGN NUMBER follow
+
+    ID              shift and go to state 29
+
+
+state 8
+
+    (53) printing -> PRINT .
+
+    STATETER        reduce using rule 53 (printing -> PRINT .)
+
+
+state 9
+
+    (51) math -> MINUS . MINUS ID STATETER
+
+    MINUS           shift and go to state 30
+
+
+state 10
+
+    (9) stmts -> expr_stmt . STATETER stmts
+
+    STATETER        shift and go to state 31
+
+
+state 11
+
+    (1) start_state -> INT ID OPBRAC CLOSEBRAC stmts .
+
+    $end            reduce using rule 1 (start_state -> INT ID OPBRAC CLOSEBRAC stmts .)
+
+
+state 12
+
+    (49) math -> PLUS . PLUS ID STATETER
+
+    PLUS            shift and go to state 32
+
+
+state 13
+
+    (12) stmts -> decfloat . STATETER stmts
+
+    STATETER        shift and go to state 33
+
+
+state 14
+
+    (11) stmts -> assignment . STATETER stmts
+
+    STATETER        shift and go to state 34
+
+
+state 15
+
+    (54) printing -> PRINTF . OPBRAC STRLIT follow CLOSEBRAC
+
+    OPBRAC          shift and go to state 35
+
+
+state 16
+
+    (2) iter_stmt -> X . Y Z
+    (4) Y -> . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 36
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    decfloat                       shift and go to state 13
+    assignment_int                 shift and go to state 26
+    Y                              shift and go to state 37
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    iter_stmt                      shift and go to state 18
+    math                           shift and go to state 25
+
+state 17
+
+    (36) decfloat -> ID . ASSIGN NUMBER
+    (35) declareint -> ID . ASSIGN NUMBER
+    (43) math -> ID . PLUS ASSIGN NUMBER STATETER
+    (44) math -> ID . PLUS ASSIGN ID STATETER
+    (45) math -> ID . MINUS ASSIGN NUMBER STATETER
+    (46) math -> ID . MINUS ASSIGN ID STATETER
+    (47) math -> ID . AOP ASSIGN NUMBER STATETER
+    (48) math -> ID . AOP ASSIGN ID STATETER
+    (50) math -> ID . PLUS PLUS STATETER
+    (52) math -> ID . MINUS MINUS STATETER
+    (17) newone -> ID . ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> ID . ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> ID . ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> ID . ASSIGN ID MINUS ID STATETER stmts
+    (34) declare -> ID . ASSIGN NUMBER followint
+
+    ASSIGN          shift and go to state 38
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 39
+    AOP             shift and go to state 41
+
+
+state 18
+
+    (8) stmts -> iter_stmt .
+
+    ELSE            reduce using rule 8 (stmts -> iter_stmt .)
+    $end            reduce using rule 8 (stmts -> iter_stmt .)
+    CLOSEFLR        reduce using rule 8 (stmts -> iter_stmt .)
+    OPENFLR         reduce using rule 8 (stmts -> iter_stmt .)
+    PRINT           reduce using rule 8 (stmts -> iter_stmt .)
+    PRINTF          reduce using rule 8 (stmts -> iter_stmt .)
+    FLOAT           reduce using rule 8 (stmts -> iter_stmt .)
+    CHAR            reduce using rule 8 (stmts -> iter_stmt .)
+    ID              reduce using rule 8 (stmts -> iter_stmt .)
+    PLUS            reduce using rule 8 (stmts -> iter_stmt .)
+    MINUS           reduce using rule 8 (stmts -> iter_stmt .)
+    IF              reduce using rule 8 (stmts -> iter_stmt .)
+    INT             reduce using rule 8 (stmts -> iter_stmt .)
+
+
+state 19
+
+    (3) X -> IF . OPBRAC cond_stmt CLOSEBRAC
+
+    OPBRAC          shift and go to state 42
+
+
+state 20
+
+    (15) stmts -> newone . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 43
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    decfloat                       shift and go to state 13
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    iter_stmt                      shift and go to state 18
+    math                           shift and go to state 25
+
+state 21
+
+    (7) stmts -> OPENFLR . stmts CLOSEFLR
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+    OPENFLR         shift and go to state 21
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 44
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 22
+
+    (23) assignment_int -> INT . ID ASSIGN NUMBER followint
+    (24) assignment_int -> INT . ID followint
+
+    ID              shift and go to state 45
+
+
+state 23
+
+    (28) assignment -> FLOAT . ID ASSIGN NUMBER followfloat
+    (29) assignment -> FLOAT . ID followfloat
+
+    ID              shift and go to state 46
+
+
+state 24
+
+    (10) stmts -> printing . STATETER stmts
+
+    STATETER        shift and go to state 47
+
+
+state 25
+
+    (14) stmts -> math . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 48
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    decfloat                       shift and go to state 13
+    printing                       shift and go to state 24
+    math                           shift and go to state 25
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    iter_stmt                      shift and go to state 18
+
+state 26
+
+    (21) expr_stmt -> assignment_int .
+
+    STATETER        reduce using rule 21 (expr_stmt -> assignment_int .)
+
+
+state 27
+
+    (22) expr_stmt -> declare .
+
+    STATETER        reduce using rule 22 (expr_stmt -> declare .)
+
+
+state 28
+
+    (13) stmts -> declareint STATETER . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 49
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    decfloat                       shift and go to state 13
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    iter_stmt                      shift and go to state 18
+    math                           shift and go to state 25
+
+state 29
+
+    (33) assignment -> CHAR ID . ASSIGN NUMBER follow
+
+    ASSIGN          shift and go to state 50
+
+
+state 30
+
+    (51) math -> MINUS MINUS . ID STATETER
+
+    ID              shift and go to state 51
+
+
+state 31
+
+    (9) stmts -> expr_stmt STATETER . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 52
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 32
+
+    (49) math -> PLUS PLUS . ID STATETER
+
+    ID              shift and go to state 53
+
+
+state 33
+
+    (12) stmts -> decfloat STATETER . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 54
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    decfloat                       shift and go to state 13
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    iter_stmt                      shift and go to state 18
+    math                           shift and go to state 25
+
+state 34
+
+    (11) stmts -> assignment STATETER . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 55
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 35
+
+    (54) printing -> PRINTF OPBRAC . STRLIT follow CLOSEBRAC
+
+    STRLIT          shift and go to state 56
+
+
+state 36
+
+    (4) Y -> stmts .
+
+    ELSE            reduce using rule 4 (Y -> stmts .)
+    $end            reduce using rule 4 (Y -> stmts .)
+    CLOSEFLR        reduce using rule 4 (Y -> stmts .)
+    OPENFLR         reduce using rule 4 (Y -> stmts .)
+    PRINT           reduce using rule 4 (Y -> stmts .)
+    PRINTF          reduce using rule 4 (Y -> stmts .)
+    FLOAT           reduce using rule 4 (Y -> stmts .)
+    CHAR            reduce using rule 4 (Y -> stmts .)
+    ID              reduce using rule 4 (Y -> stmts .)
+    PLUS            reduce using rule 4 (Y -> stmts .)
+    MINUS           reduce using rule 4 (Y -> stmts .)
+    IF              reduce using rule 4 (Y -> stmts .)
+    INT             reduce using rule 4 (Y -> stmts .)
+
+
+state 37
+
+    (2) iter_stmt -> X Y . Z
+    (5) Z -> . ELSE stmts stmts
+    (6) Z -> .
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ELSE            shift and go to state 58
+    $end            reduce using rule 6 (Z -> .)
+    CLOSEFLR        reduce using rule 6 (Z -> .)
+    OPENFLR         reduce using rule 6 (Z -> .)
+    PRINT           reduce using rule 6 (Z -> .)
+    PRINTF          reduce using rule 6 (Z -> .)
+    FLOAT           reduce using rule 6 (Z -> .)
+    CHAR            reduce using rule 6 (Z -> .)
+    ID              reduce using rule 6 (Z -> .)
+    PLUS            reduce using rule 6 (Z -> .)
+    MINUS           reduce using rule 6 (Z -> .)
+    IF              reduce using rule 6 (Z -> .)
+    INT             reduce using rule 6 (Z -> .)
+
+  ! ELSE            [ reduce using rule 6 (Z -> .) ]
+
+    Z                              shift and go to state 57
+
+state 38
+
+    (36) decfloat -> ID ASSIGN . NUMBER
+    (35) declareint -> ID ASSIGN . NUMBER
+    (17) newone -> ID ASSIGN . ID PLUS NUMBER STATETER stmts
+    (18) newone -> ID ASSIGN . ID PLUS ID STATETER stmts
+    (19) newone -> ID ASSIGN . ID MINUS NUMBER STATETER stmts
+    (20) newone -> ID ASSIGN . ID MINUS ID STATETER stmts
+    (34) declare -> ID ASSIGN . NUMBER followint
+
+    NUMBER          shift and go to state 59
+    ID              shift and go to state 60
+
+
+state 39
+
+    (45) math -> ID MINUS . ASSIGN NUMBER STATETER
+    (46) math -> ID MINUS . ASSIGN ID STATETER
+    (52) math -> ID MINUS . MINUS STATETER
+
+    ASSIGN          shift and go to state 61
+    MINUS           shift and go to state 62
+
+
+state 40
+
+    (43) math -> ID PLUS . ASSIGN NUMBER STATETER
+    (44) math -> ID PLUS . ASSIGN ID STATETER
+    (50) math -> ID PLUS . PLUS STATETER
+
+    ASSIGN          shift and go to state 64
+    PLUS            shift and go to state 63
+
+
+state 41
+
+    (47) math -> ID AOP . ASSIGN NUMBER STATETER
+    (48) math -> ID AOP . ASSIGN ID STATETER
+
+    ASSIGN          shift and go to state 65
+
+
+state 42
+
+    (3) X -> IF OPBRAC . cond_stmt CLOSEBRAC
+    (37) cond_stmt -> . ID RELOP ID
+    (38) cond_stmt -> . ID RELOP NUMBER
+    (39) cond_stmt -> . NUMBER RELOP ID
+    (40) cond_stmt -> . NUMBER RELOP NUMBER
+    (41) cond_stmt -> . cond_stmt LOGOP cond_stmt
+    (42) cond_stmt -> .
+
+    ID              shift and go to state 68
+    NUMBER          shift and go to state 67
+    CLOSEBRAC       reduce using rule 42 (cond_stmt -> .)
+    LOGOP           reduce using rule 42 (cond_stmt -> .)
+
+    cond_stmt                      shift and go to state 66
+
+state 43
+
+    (15) stmts -> newone stmts .
+
+    ELSE            reduce using rule 15 (stmts -> newone stmts .)
+    $end            reduce using rule 15 (stmts -> newone stmts .)
+    CLOSEFLR        reduce using rule 15 (stmts -> newone stmts .)
+    OPENFLR         reduce using rule 15 (stmts -> newone stmts .)
+    PRINT           reduce using rule 15 (stmts -> newone stmts .)
+    PRINTF          reduce using rule 15 (stmts -> newone stmts .)
+    FLOAT           reduce using rule 15 (stmts -> newone stmts .)
+    CHAR            reduce using rule 15 (stmts -> newone stmts .)
+    ID              reduce using rule 15 (stmts -> newone stmts .)
+    PLUS            reduce using rule 15 (stmts -> newone stmts .)
+    MINUS           reduce using rule 15 (stmts -> newone stmts .)
+    IF              reduce using rule 15 (stmts -> newone stmts .)
+    INT             reduce using rule 15 (stmts -> newone stmts .)
+
+
+state 44
+
+    (7) stmts -> OPENFLR stmts . CLOSEFLR
+
+    CLOSEFLR        shift and go to state 69
+
+
+state 45
+
+    (23) assignment_int -> INT ID . ASSIGN NUMBER followint
+    (24) assignment_int -> INT ID . followint
+    (25) followint -> . COMMA ID ASSIGN NUMBER followint
+    (26) followint -> . COMMA ID followint
+    (27) followint -> .
+
+    ASSIGN          shift and go to state 71
+    COMMA           shift and go to state 72
+    STATETER        reduce using rule 27 (followint -> .)
+
+    followint                      shift and go to state 70
+
+state 46
+
+    (28) assignment -> FLOAT ID . ASSIGN NUMBER followfloat
+    (29) assignment -> FLOAT ID . followfloat
+    (30) followfloat -> . COMMA ID ASSIGN NUMBER followfloat
+    (31) followfloat -> . COMMA ID followfloat
+    (32) followfloat -> .
+
+    ASSIGN          shift and go to state 74
+    COMMA           shift and go to state 75
+    STATETER        reduce using rule 32 (followfloat -> .)
+
+    followfloat                    shift and go to state 73
+
+state 47
+
+    (10) stmts -> printing STATETER . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 76
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 48
+
+    (14) stmts -> math stmts .
+
+    ELSE            reduce using rule 14 (stmts -> math stmts .)
+    $end            reduce using rule 14 (stmts -> math stmts .)
+    CLOSEFLR        reduce using rule 14 (stmts -> math stmts .)
+    OPENFLR         reduce using rule 14 (stmts -> math stmts .)
+    PRINT           reduce using rule 14 (stmts -> math stmts .)
+    PRINTF          reduce using rule 14 (stmts -> math stmts .)
+    FLOAT           reduce using rule 14 (stmts -> math stmts .)
+    CHAR            reduce using rule 14 (stmts -> math stmts .)
+    ID              reduce using rule 14 (stmts -> math stmts .)
+    PLUS            reduce using rule 14 (stmts -> math stmts .)
+    MINUS           reduce using rule 14 (stmts -> math stmts .)
+    IF              reduce using rule 14 (stmts -> math stmts .)
+    INT             reduce using rule 14 (stmts -> math stmts .)
+
+
+state 49
+
+    (13) stmts -> declareint STATETER stmts .
+
+    ELSE            reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    $end            reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    CLOSEFLR        reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    OPENFLR         reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    PRINT           reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    PRINTF          reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    FLOAT           reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    CHAR            reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    ID              reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    PLUS            reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    MINUS           reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    IF              reduce using rule 13 (stmts -> declareint STATETER stmts .)
+    INT             reduce using rule 13 (stmts -> declareint STATETER stmts .)
+
+
+state 50
+
+    (33) assignment -> CHAR ID ASSIGN . NUMBER follow
+
+    NUMBER          shift and go to state 77
+
+
+state 51
+
+    (51) math -> MINUS MINUS ID . STATETER
+
+    STATETER        shift and go to state 78
+
+
+state 52
+
+    (9) stmts -> expr_stmt STATETER stmts .
+
+    ELSE            reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    $end            reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    CLOSEFLR        reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    OPENFLR         reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    PRINT           reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    PRINTF          reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    FLOAT           reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    CHAR            reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    ID              reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    PLUS            reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    MINUS           reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    IF              reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+    INT             reduce using rule 9 (stmts -> expr_stmt STATETER stmts .)
+
+
+state 53
+
+    (49) math -> PLUS PLUS ID . STATETER
+
+    STATETER        shift and go to state 79
+
+
+state 54
+
+    (12) stmts -> decfloat STATETER stmts .
+
+    ELSE            reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    $end            reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    CLOSEFLR        reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    OPENFLR         reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    PRINT           reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    PRINTF          reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    FLOAT           reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    CHAR            reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    ID              reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    PLUS            reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    MINUS           reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    IF              reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+    INT             reduce using rule 12 (stmts -> decfloat STATETER stmts .)
+
+
+state 55
+
+    (11) stmts -> assignment STATETER stmts .
+
+    ELSE            reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    $end            reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    CLOSEFLR        reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    OPENFLR         reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    PRINT           reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    PRINTF          reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    FLOAT           reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    CHAR            reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    ID              reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    PLUS            reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    MINUS           reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    IF              reduce using rule 11 (stmts -> assignment STATETER stmts .)
+    INT             reduce using rule 11 (stmts -> assignment STATETER stmts .)
+
+
+state 56
+
+    (54) printing -> PRINTF OPBRAC STRLIT . follow CLOSEBRAC
+    (55) follow -> . COMMA ID follow
+    (56) follow -> .
+
+    COMMA           shift and go to state 80
+    CLOSEBRAC       reduce using rule 56 (follow -> .)
+
+    follow                         shift and go to state 81
+
+state 57
+
+    (2) iter_stmt -> X Y Z .
+
+    ELSE            reduce using rule 2 (iter_stmt -> X Y Z .)
+    $end            reduce using rule 2 (iter_stmt -> X Y Z .)
+    CLOSEFLR        reduce using rule 2 (iter_stmt -> X Y Z .)
+    OPENFLR         reduce using rule 2 (iter_stmt -> X Y Z .)
+    PRINT           reduce using rule 2 (iter_stmt -> X Y Z .)
+    PRINTF          reduce using rule 2 (iter_stmt -> X Y Z .)
+    FLOAT           reduce using rule 2 (iter_stmt -> X Y Z .)
+    CHAR            reduce using rule 2 (iter_stmt -> X Y Z .)
+    ID              reduce using rule 2 (iter_stmt -> X Y Z .)
+    PLUS            reduce using rule 2 (iter_stmt -> X Y Z .)
+    MINUS           reduce using rule 2 (iter_stmt -> X Y Z .)
+    IF              reduce using rule 2 (iter_stmt -> X Y Z .)
+    INT             reduce using rule 2 (iter_stmt -> X Y Z .)
+
+
+state 58
+
+    (5) Z -> ELSE . stmts stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 82
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 59
+
+    (36) decfloat -> ID ASSIGN NUMBER .
+    (35) declareint -> ID ASSIGN NUMBER .
+    (34) declare -> ID ASSIGN NUMBER . followint
+    (25) followint -> . COMMA ID ASSIGN NUMBER followint
+    (26) followint -> . COMMA ID followint
+    (27) followint -> .
+
+  ! reduce/reduce conflict for STATETER resolved using rule 35 (declareint -> ID ASSIGN NUMBER .)
+  ! reduce/reduce conflict for STATETER resolved using rule 27 (followint -> .)
+    COMMA           shift and go to state 72
+    STATETER        reduce using rule 27 (followint -> .)
+
+  ! STATETER        [ reduce using rule 36 (decfloat -> ID ASSIGN NUMBER .) ]
+  ! STATETER        [ reduce using rule 35 (declareint -> ID ASSIGN NUMBER .) ]
+
+    followint                      shift and go to state 83
+
+state 60
+
+    (17) newone -> ID ASSIGN ID . PLUS NUMBER STATETER stmts
+    (18) newone -> ID ASSIGN ID . PLUS ID STATETER stmts
+    (19) newone -> ID ASSIGN ID . MINUS NUMBER STATETER stmts
+    (20) newone -> ID ASSIGN ID . MINUS ID STATETER stmts
+
+    PLUS            shift and go to state 84
+    MINUS           shift and go to state 85
+
+
+state 61
+
+    (45) math -> ID MINUS ASSIGN . NUMBER STATETER
+    (46) math -> ID MINUS ASSIGN . ID STATETER
+
+    NUMBER          shift and go to state 86
+    ID              shift and go to state 87
+
+
+state 62
+
+    (52) math -> ID MINUS MINUS . STATETER
+
+    STATETER        shift and go to state 88
+
+
+state 63
+
+    (50) math -> ID PLUS PLUS . STATETER
+
+    STATETER        shift and go to state 89
+
+
+state 64
+
+    (43) math -> ID PLUS ASSIGN . NUMBER STATETER
+    (44) math -> ID PLUS ASSIGN . ID STATETER
+
+    NUMBER          shift and go to state 90
+    ID              shift and go to state 91
+
+
+state 65
+
+    (47) math -> ID AOP ASSIGN . NUMBER STATETER
+    (48) math -> ID AOP ASSIGN . ID STATETER
+
+    NUMBER          shift and go to state 92
+    ID              shift and go to state 93
+
+
+state 66
+
+    (3) X -> IF OPBRAC cond_stmt . CLOSEBRAC
+    (41) cond_stmt -> cond_stmt . LOGOP cond_stmt
+
+    CLOSEBRAC       shift and go to state 94
+    LOGOP           shift and go to state 95
+
+
+state 67
+
+    (39) cond_stmt -> NUMBER . RELOP ID
+    (40) cond_stmt -> NUMBER . RELOP NUMBER
+
+    RELOP           shift and go to state 96
+
+
+state 68
+
+    (37) cond_stmt -> ID . RELOP ID
+    (38) cond_stmt -> ID . RELOP NUMBER
+
+    RELOP           shift and go to state 97
+
+
+state 69
+
+    (7) stmts -> OPENFLR stmts CLOSEFLR .
+
+    ELSE            reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    $end            reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    CLOSEFLR        reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    OPENFLR         reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    PRINT           reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    PRINTF          reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    FLOAT           reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    CHAR            reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    ID              reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    PLUS            reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    MINUS           reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    IF              reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+    INT             reduce using rule 7 (stmts -> OPENFLR stmts CLOSEFLR .)
+
+
+state 70
+
+    (24) assignment_int -> INT ID followint .
+
+    STATETER        reduce using rule 24 (assignment_int -> INT ID followint .)
+
+
+state 71
+
+    (23) assignment_int -> INT ID ASSIGN . NUMBER followint
+
+    NUMBER          shift and go to state 98
+
+
+state 72
+
+    (25) followint -> COMMA . ID ASSIGN NUMBER followint
+    (26) followint -> COMMA . ID followint
+
+    ID              shift and go to state 99
+
+
+state 73
+
+    (29) assignment -> FLOAT ID followfloat .
+
+    STATETER        reduce using rule 29 (assignment -> FLOAT ID followfloat .)
+
+
+state 74
+
+    (28) assignment -> FLOAT ID ASSIGN . NUMBER followfloat
+
+    NUMBER          shift and go to state 100
+
+
+state 75
+
+    (30) followfloat -> COMMA . ID ASSIGN NUMBER followfloat
+    (31) followfloat -> COMMA . ID followfloat
+
+    ID              shift and go to state 101
+
+
+state 76
+
+    (10) stmts -> printing STATETER stmts .
+
+    ELSE            reduce using rule 10 (stmts -> printing STATETER stmts .)
+    $end            reduce using rule 10 (stmts -> printing STATETER stmts .)
+    CLOSEFLR        reduce using rule 10 (stmts -> printing STATETER stmts .)
+    OPENFLR         reduce using rule 10 (stmts -> printing STATETER stmts .)
+    PRINT           reduce using rule 10 (stmts -> printing STATETER stmts .)
+    PRINTF          reduce using rule 10 (stmts -> printing STATETER stmts .)
+    FLOAT           reduce using rule 10 (stmts -> printing STATETER stmts .)
+    CHAR            reduce using rule 10 (stmts -> printing STATETER stmts .)
+    ID              reduce using rule 10 (stmts -> printing STATETER stmts .)
+    PLUS            reduce using rule 10 (stmts -> printing STATETER stmts .)
+    MINUS           reduce using rule 10 (stmts -> printing STATETER stmts .)
+    IF              reduce using rule 10 (stmts -> printing STATETER stmts .)
+    INT             reduce using rule 10 (stmts -> printing STATETER stmts .)
+
+
+state 77
+
+    (33) assignment -> CHAR ID ASSIGN NUMBER . follow
+    (55) follow -> . COMMA ID follow
+    (56) follow -> .
+
+    COMMA           shift and go to state 80
+    STATETER        reduce using rule 56 (follow -> .)
+
+    follow                         shift and go to state 102
+
+state 78
+
+    (51) math -> MINUS MINUS ID STATETER .
+
+    OPENFLR         reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    PRINT           reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    PRINTF          reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    FLOAT           reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    CHAR            reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    ID              reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    PLUS            reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    MINUS           reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    IF              reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    INT             reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    ELSE            reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    $end            reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+    CLOSEFLR        reduce using rule 51 (math -> MINUS MINUS ID STATETER .)
+
+
+state 79
+
+    (49) math -> PLUS PLUS ID STATETER .
+
+    OPENFLR         reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    PRINT           reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    PRINTF          reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    FLOAT           reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    CHAR            reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    ID              reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    PLUS            reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    MINUS           reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    IF              reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    INT             reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    ELSE            reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    $end            reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+    CLOSEFLR        reduce using rule 49 (math -> PLUS PLUS ID STATETER .)
+
+
+state 80
+
+    (55) follow -> COMMA . ID follow
+
+    ID              shift and go to state 103
+
+
+state 81
+
+    (54) printing -> PRINTF OPBRAC STRLIT follow . CLOSEBRAC
+
+    CLOSEBRAC       shift and go to state 104
+
+
+state 82
+
+    (5) Z -> ELSE stmts . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 105
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 83
+
+    (34) declare -> ID ASSIGN NUMBER followint .
+
+    STATETER        reduce using rule 34 (declare -> ID ASSIGN NUMBER followint .)
+
+
+state 84
+
+    (17) newone -> ID ASSIGN ID PLUS . NUMBER STATETER stmts
+    (18) newone -> ID ASSIGN ID PLUS . ID STATETER stmts
+
+    NUMBER          shift and go to state 106
+    ID              shift and go to state 107
+
+
+state 85
+
+    (19) newone -> ID ASSIGN ID MINUS . NUMBER STATETER stmts
+    (20) newone -> ID ASSIGN ID MINUS . ID STATETER stmts
+
+    NUMBER          shift and go to state 108
+    ID              shift and go to state 109
+
+
+state 86
+
+    (45) math -> ID MINUS ASSIGN NUMBER . STATETER
+
+    STATETER        shift and go to state 110
+
+
+state 87
+
+    (46) math -> ID MINUS ASSIGN ID . STATETER
+
+    STATETER        shift and go to state 111
+
+
+state 88
+
+    (52) math -> ID MINUS MINUS STATETER .
+
+    OPENFLR         reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    PRINT           reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    PRINTF          reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    FLOAT           reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    CHAR            reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    ID              reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    PLUS            reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    MINUS           reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    IF              reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    INT             reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    ELSE            reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    $end            reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+    CLOSEFLR        reduce using rule 52 (math -> ID MINUS MINUS STATETER .)
+
+
+state 89
+
+    (50) math -> ID PLUS PLUS STATETER .
+
+    OPENFLR         reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    PRINT           reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    PRINTF          reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    FLOAT           reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    CHAR            reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    ID              reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    PLUS            reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    MINUS           reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    IF              reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    INT             reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    ELSE            reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    $end            reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+    CLOSEFLR        reduce using rule 50 (math -> ID PLUS PLUS STATETER .)
+
+
+state 90
+
+    (43) math -> ID PLUS ASSIGN NUMBER . STATETER
+
+    STATETER        shift and go to state 112
+
+
+state 91
+
+    (44) math -> ID PLUS ASSIGN ID . STATETER
+
+    STATETER        shift and go to state 113
+
+
+state 92
+
+    (47) math -> ID AOP ASSIGN NUMBER . STATETER
+
+    STATETER        shift and go to state 114
+
+
+state 93
+
+    (48) math -> ID AOP ASSIGN ID . STATETER
+
+    STATETER        shift and go to state 115
+
+
+state 94
+
+    (3) X -> IF OPBRAC cond_stmt CLOSEBRAC .
+
+    OPENFLR         reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    PRINT           reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    PRINTF          reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    FLOAT           reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    CHAR            reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    ID              reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    PLUS            reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    MINUS           reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    IF              reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    INT             reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    ELSE            reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    $end            reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+    CLOSEFLR        reduce using rule 3 (X -> IF OPBRAC cond_stmt CLOSEBRAC .)
+
+
+state 95
+
+    (41) cond_stmt -> cond_stmt LOGOP . cond_stmt
+    (37) cond_stmt -> . ID RELOP ID
+    (38) cond_stmt -> . ID RELOP NUMBER
+    (39) cond_stmt -> . NUMBER RELOP ID
+    (40) cond_stmt -> . NUMBER RELOP NUMBER
+    (41) cond_stmt -> . cond_stmt LOGOP cond_stmt
+    (42) cond_stmt -> .
+
+    ID              shift and go to state 68
+    NUMBER          shift and go to state 67
+    LOGOP           reduce using rule 42 (cond_stmt -> .)
+    CLOSEBRAC       reduce using rule 42 (cond_stmt -> .)
+
+    cond_stmt                      shift and go to state 116
+
+state 96
+
+    (39) cond_stmt -> NUMBER RELOP . ID
+    (40) cond_stmt -> NUMBER RELOP . NUMBER
+
+    ID              shift and go to state 117
+    NUMBER          shift and go to state 118
+
+
+state 97
+
+    (37) cond_stmt -> ID RELOP . ID
+    (38) cond_stmt -> ID RELOP . NUMBER
+
+    ID              shift and go to state 120
+    NUMBER          shift and go to state 119
+
+
+state 98
+
+    (23) assignment_int -> INT ID ASSIGN NUMBER . followint
+    (25) followint -> . COMMA ID ASSIGN NUMBER followint
+    (26) followint -> . COMMA ID followint
+    (27) followint -> .
+
+    COMMA           shift and go to state 72
+    STATETER        reduce using rule 27 (followint -> .)
+
+    followint                      shift and go to state 121
+
+state 99
+
+    (25) followint -> COMMA ID . ASSIGN NUMBER followint
+    (26) followint -> COMMA ID . followint
+    (25) followint -> . COMMA ID ASSIGN NUMBER followint
+    (26) followint -> . COMMA ID followint
+    (27) followint -> .
+
+    ASSIGN          shift and go to state 123
+    COMMA           shift and go to state 72
+    STATETER        reduce using rule 27 (followint -> .)
+
+    followint                      shift and go to state 122
+
+state 100
+
+    (28) assignment -> FLOAT ID ASSIGN NUMBER . followfloat
+    (30) followfloat -> . COMMA ID ASSIGN NUMBER followfloat
+    (31) followfloat -> . COMMA ID followfloat
+    (32) followfloat -> .
+
+    COMMA           shift and go to state 75
+    STATETER        reduce using rule 32 (followfloat -> .)
+
+    followfloat                    shift and go to state 124
+
+state 101
+
+    (30) followfloat -> COMMA ID . ASSIGN NUMBER followfloat
+    (31) followfloat -> COMMA ID . followfloat
+    (30) followfloat -> . COMMA ID ASSIGN NUMBER followfloat
+    (31) followfloat -> . COMMA ID followfloat
+    (32) followfloat -> .
+
+    ASSIGN          shift and go to state 126
+    COMMA           shift and go to state 75
+    STATETER        reduce using rule 32 (followfloat -> .)
+
+    followfloat                    shift and go to state 125
+
+state 102
+
+    (33) assignment -> CHAR ID ASSIGN NUMBER follow .
+
+    STATETER        reduce using rule 33 (assignment -> CHAR ID ASSIGN NUMBER follow .)
+
+
+state 103
+
+    (55) follow -> COMMA ID . follow
+    (55) follow -> . COMMA ID follow
+    (56) follow -> .
+
+    COMMA           shift and go to state 80
+    CLOSEBRAC       reduce using rule 56 (follow -> .)
+    STATETER        reduce using rule 56 (follow -> .)
+
+    follow                         shift and go to state 127
+
+state 104
+
+    (54) printing -> PRINTF OPBRAC STRLIT follow CLOSEBRAC .
+
+    STATETER        reduce using rule 54 (printing -> PRINTF OPBRAC STRLIT follow CLOSEBRAC .)
+
+
+state 105
+
+    (5) Z -> ELSE stmts stmts .
+
+    ELSE            reduce using rule 5 (Z -> ELSE stmts stmts .)
+    $end            reduce using rule 5 (Z -> ELSE stmts stmts .)
+    CLOSEFLR        reduce using rule 5 (Z -> ELSE stmts stmts .)
+    OPENFLR         reduce using rule 5 (Z -> ELSE stmts stmts .)
+    PRINT           reduce using rule 5 (Z -> ELSE stmts stmts .)
+    PRINTF          reduce using rule 5 (Z -> ELSE stmts stmts .)
+    FLOAT           reduce using rule 5 (Z -> ELSE stmts stmts .)
+    CHAR            reduce using rule 5 (Z -> ELSE stmts stmts .)
+    ID              reduce using rule 5 (Z -> ELSE stmts stmts .)
+    PLUS            reduce using rule 5 (Z -> ELSE stmts stmts .)
+    MINUS           reduce using rule 5 (Z -> ELSE stmts stmts .)
+    IF              reduce using rule 5 (Z -> ELSE stmts stmts .)
+    INT             reduce using rule 5 (Z -> ELSE stmts stmts .)
+
+
+state 106
+
+    (17) newone -> ID ASSIGN ID PLUS NUMBER . STATETER stmts
+
+    STATETER        shift and go to state 128
+
+
+state 107
+
+    (18) newone -> ID ASSIGN ID PLUS ID . STATETER stmts
+
+    STATETER        shift and go to state 129
+
+
+state 108
+
+    (19) newone -> ID ASSIGN ID MINUS NUMBER . STATETER stmts
+
+    STATETER        shift and go to state 130
+
+
+state 109
+
+    (20) newone -> ID ASSIGN ID MINUS ID . STATETER stmts
+
+    STATETER        shift and go to state 131
+
+
+state 110
+
+    (45) math -> ID MINUS ASSIGN NUMBER STATETER .
+
+    OPENFLR         reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    PRINT           reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    PRINTF          reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    FLOAT           reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    CHAR            reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    ID              reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    PLUS            reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    MINUS           reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    IF              reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    INT             reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    ELSE            reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    $end            reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+    CLOSEFLR        reduce using rule 45 (math -> ID MINUS ASSIGN NUMBER STATETER .)
+
+
+state 111
+
+    (46) math -> ID MINUS ASSIGN ID STATETER .
+
+    OPENFLR         reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    PRINT           reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    PRINTF          reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    FLOAT           reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    CHAR            reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    ID              reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    PLUS            reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    MINUS           reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    IF              reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    INT             reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    ELSE            reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    $end            reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+    CLOSEFLR        reduce using rule 46 (math -> ID MINUS ASSIGN ID STATETER .)
+
+
+state 112
+
+    (43) math -> ID PLUS ASSIGN NUMBER STATETER .
+
+    OPENFLR         reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    PRINT           reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    PRINTF          reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    FLOAT           reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    CHAR            reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    ID              reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    PLUS            reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    MINUS           reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    IF              reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    INT             reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    ELSE            reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    $end            reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+    CLOSEFLR        reduce using rule 43 (math -> ID PLUS ASSIGN NUMBER STATETER .)
+
+
+state 113
+
+    (44) math -> ID PLUS ASSIGN ID STATETER .
+
+    OPENFLR         reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    PRINT           reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    PRINTF          reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    FLOAT           reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    CHAR            reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    ID              reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    PLUS            reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    MINUS           reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    IF              reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    INT             reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    ELSE            reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    $end            reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+    CLOSEFLR        reduce using rule 44 (math -> ID PLUS ASSIGN ID STATETER .)
+
+
+state 114
+
+    (47) math -> ID AOP ASSIGN NUMBER STATETER .
+
+    OPENFLR         reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    PRINT           reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    PRINTF          reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    FLOAT           reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    CHAR            reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    ID              reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    PLUS            reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    MINUS           reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    IF              reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    INT             reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    ELSE            reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    $end            reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+    CLOSEFLR        reduce using rule 47 (math -> ID AOP ASSIGN NUMBER STATETER .)
+
+
+state 115
+
+    (48) math -> ID AOP ASSIGN ID STATETER .
+
+    OPENFLR         reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    PRINT           reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    PRINTF          reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    FLOAT           reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    CHAR            reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    ID              reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    PLUS            reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    MINUS           reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    IF              reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    INT             reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    ELSE            reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    $end            reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+    CLOSEFLR        reduce using rule 48 (math -> ID AOP ASSIGN ID STATETER .)
+
+
+state 116
+
+    (41) cond_stmt -> cond_stmt LOGOP cond_stmt .
+    (41) cond_stmt -> cond_stmt . LOGOP cond_stmt
+
+  ! shift/reduce conflict for LOGOP resolved as shift
+    CLOSEBRAC       reduce using rule 41 (cond_stmt -> cond_stmt LOGOP cond_stmt .)
+    LOGOP           shift and go to state 95
+
+  ! LOGOP           [ reduce using rule 41 (cond_stmt -> cond_stmt LOGOP cond_stmt .) ]
+
+
+state 117
+
+    (39) cond_stmt -> NUMBER RELOP ID .
+
+    CLOSEBRAC       reduce using rule 39 (cond_stmt -> NUMBER RELOP ID .)
+    LOGOP           reduce using rule 39 (cond_stmt -> NUMBER RELOP ID .)
+
+
+state 118
+
+    (40) cond_stmt -> NUMBER RELOP NUMBER .
+
+    CLOSEBRAC       reduce using rule 40 (cond_stmt -> NUMBER RELOP NUMBER .)
+    LOGOP           reduce using rule 40 (cond_stmt -> NUMBER RELOP NUMBER .)
+
+
+state 119
+
+    (38) cond_stmt -> ID RELOP NUMBER .
+
+    CLOSEBRAC       reduce using rule 38 (cond_stmt -> ID RELOP NUMBER .)
+    LOGOP           reduce using rule 38 (cond_stmt -> ID RELOP NUMBER .)
+
+
+state 120
+
+    (37) cond_stmt -> ID RELOP ID .
+
+    CLOSEBRAC       reduce using rule 37 (cond_stmt -> ID RELOP ID .)
+    LOGOP           reduce using rule 37 (cond_stmt -> ID RELOP ID .)
+
+
+state 121
+
+    (23) assignment_int -> INT ID ASSIGN NUMBER followint .
+
+    STATETER        reduce using rule 23 (assignment_int -> INT ID ASSIGN NUMBER followint .)
+
+
+state 122
+
+    (26) followint -> COMMA ID followint .
+
+    STATETER        reduce using rule 26 (followint -> COMMA ID followint .)
+
+
+state 123
+
+    (25) followint -> COMMA ID ASSIGN . NUMBER followint
+
+    NUMBER          shift and go to state 132
+
+
+state 124
+
+    (28) assignment -> FLOAT ID ASSIGN NUMBER followfloat .
+
+    STATETER        reduce using rule 28 (assignment -> FLOAT ID ASSIGN NUMBER followfloat .)
+
+
+state 125
+
+    (31) followfloat -> COMMA ID followfloat .
+
+    STATETER        reduce using rule 31 (followfloat -> COMMA ID followfloat .)
+
+
+state 126
+
+    (30) followfloat -> COMMA ID ASSIGN . NUMBER followfloat
+
+    NUMBER          shift and go to state 133
+
+
+state 127
+
+    (55) follow -> COMMA ID follow .
+
+    CLOSEBRAC       reduce using rule 55 (follow -> COMMA ID follow .)
+    STATETER        reduce using rule 55 (follow -> COMMA ID follow .)
+
+
+state 128
+
+    (17) newone -> ID ASSIGN ID PLUS NUMBER STATETER . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 134
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 129
+
+    (18) newone -> ID ASSIGN ID PLUS ID STATETER . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 135
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 130
+
+    (19) newone -> ID ASSIGN ID MINUS NUMBER STATETER . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 136
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 131
+
+    (20) newone -> ID ASSIGN ID MINUS ID STATETER . stmts
+    (7) stmts -> . OPENFLR stmts CLOSEFLR
+    (8) stmts -> . iter_stmt
+    (9) stmts -> . expr_stmt STATETER stmts
+    (10) stmts -> . printing STATETER stmts
+    (11) stmts -> . assignment STATETER stmts
+    (12) stmts -> . decfloat STATETER stmts
+    (13) stmts -> . declareint STATETER stmts
+    (14) stmts -> . math stmts
+    (15) stmts -> . newone stmts
+    (16) stmts -> .
+    (2) iter_stmt -> . X Y Z
+    (21) expr_stmt -> . assignment_int
+    (22) expr_stmt -> . declare
+    (53) printing -> . PRINT
+    (54) printing -> . PRINTF OPBRAC STRLIT follow CLOSEBRAC
+    (28) assignment -> . FLOAT ID ASSIGN NUMBER followfloat
+    (29) assignment -> . FLOAT ID followfloat
+    (33) assignment -> . CHAR ID ASSIGN NUMBER follow
+    (36) decfloat -> . ID ASSIGN NUMBER
+    (35) declareint -> . ID ASSIGN NUMBER
+    (43) math -> . ID PLUS ASSIGN NUMBER STATETER
+    (44) math -> . ID PLUS ASSIGN ID STATETER
+    (45) math -> . ID MINUS ASSIGN NUMBER STATETER
+    (46) math -> . ID MINUS ASSIGN ID STATETER
+    (47) math -> . ID AOP ASSIGN NUMBER STATETER
+    (48) math -> . ID AOP ASSIGN ID STATETER
+    (49) math -> . PLUS PLUS ID STATETER
+    (50) math -> . ID PLUS PLUS STATETER
+    (51) math -> . MINUS MINUS ID STATETER
+    (52) math -> . ID MINUS MINUS STATETER
+    (17) newone -> . ID ASSIGN ID PLUS NUMBER STATETER stmts
+    (18) newone -> . ID ASSIGN ID PLUS ID STATETER stmts
+    (19) newone -> . ID ASSIGN ID MINUS NUMBER STATETER stmts
+    (20) newone -> . ID ASSIGN ID MINUS ID STATETER stmts
+    (3) X -> . IF OPBRAC cond_stmt CLOSEBRAC
+    (23) assignment_int -> . INT ID ASSIGN NUMBER followint
+    (24) assignment_int -> . INT ID followint
+    (34) declare -> . ID ASSIGN NUMBER followint
+
+  ! shift/reduce conflict for OPENFLR resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+  ! shift/reduce conflict for PRINTF resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+    OPENFLR         shift and go to state 21
+    ELSE            reduce using rule 16 (stmts -> .)
+    $end            reduce using rule 16 (stmts -> .)
+    CLOSEFLR        reduce using rule 16 (stmts -> .)
+    PRINT           shift and go to state 8
+    PRINTF          shift and go to state 15
+    FLOAT           shift and go to state 23
+    CHAR            shift and go to state 7
+    ID              shift and go to state 17
+    PLUS            shift and go to state 12
+    MINUS           shift and go to state 9
+    IF              shift and go to state 19
+    INT             shift and go to state 22
+
+  ! OPENFLR         [ reduce using rule 16 (stmts -> .) ]
+  ! PRINT           [ reduce using rule 16 (stmts -> .) ]
+  ! PRINTF          [ reduce using rule 16 (stmts -> .) ]
+  ! FLOAT           [ reduce using rule 16 (stmts -> .) ]
+  ! CHAR            [ reduce using rule 16 (stmts -> .) ]
+  ! ID              [ reduce using rule 16 (stmts -> .) ]
+  ! PLUS            [ reduce using rule 16 (stmts -> .) ]
+  ! MINUS           [ reduce using rule 16 (stmts -> .) ]
+  ! IF              [ reduce using rule 16 (stmts -> .) ]
+  ! INT             [ reduce using rule 16 (stmts -> .) ]
+
+    newone                         shift and go to state 20
+    stmts                          shift and go to state 137
+    assignment                     shift and go to state 14
+    declareint                     shift and go to state 6
+    printing                       shift and go to state 24
+    iter_stmt                      shift and go to state 18
+    assignment_int                 shift and go to state 26
+    X                              shift and go to state 16
+    expr_stmt                      shift and go to state 10
+    declare                        shift and go to state 27
+    decfloat                       shift and go to state 13
+    math                           shift and go to state 25
+
+state 132
+
+    (25) followint -> COMMA ID ASSIGN NUMBER . followint
+    (25) followint -> . COMMA ID ASSIGN NUMBER followint
+    (26) followint -> . COMMA ID followint
+    (27) followint -> .
+
+    COMMA           shift and go to state 72
+    STATETER        reduce using rule 27 (followint -> .)
+
+    followint                      shift and go to state 138
+
+state 133
+
+    (30) followfloat -> COMMA ID ASSIGN NUMBER . followfloat
+    (30) followfloat -> . COMMA ID ASSIGN NUMBER followfloat
+    (31) followfloat -> . COMMA ID followfloat
+    (32) followfloat -> .
+
+    COMMA           shift and go to state 75
+    STATETER        reduce using rule 32 (followfloat -> .)
+
+    followfloat                    shift and go to state 139
+
+state 134
+
+    (17) newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .
+
+    ELSE            reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    $end            reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    CLOSEFLR        reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    OPENFLR         reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    PRINT           reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    PRINTF          reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    FLOAT           reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    CHAR            reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    ID              reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    PLUS            reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    MINUS           reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    IF              reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+    INT             reduce using rule 17 (newone -> ID ASSIGN ID PLUS NUMBER STATETER stmts .)
+
+
+state 135
+
+    (18) newone -> ID ASSIGN ID PLUS ID STATETER stmts .
+
+    ELSE            reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    $end            reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    CLOSEFLR        reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    OPENFLR         reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    PRINT           reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    PRINTF          reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    FLOAT           reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    CHAR            reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    ID              reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    PLUS            reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    MINUS           reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    IF              reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+    INT             reduce using rule 18 (newone -> ID ASSIGN ID PLUS ID STATETER stmts .)
+
+
+state 136
+
+    (19) newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .
+
+    ELSE            reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    $end            reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    CLOSEFLR        reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    OPENFLR         reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    PRINT           reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    PRINTF          reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    FLOAT           reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    CHAR            reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    ID              reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    PLUS            reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    MINUS           reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    IF              reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+    INT             reduce using rule 19 (newone -> ID ASSIGN ID MINUS NUMBER STATETER stmts .)
+
+
+state 137
+
+    (20) newone -> ID ASSIGN ID MINUS ID STATETER stmts .
+
+    ELSE            reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    $end            reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    CLOSEFLR        reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    OPENFLR         reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    PRINT           reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    PRINTF          reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    FLOAT           reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    CHAR            reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    ID              reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    PLUS            reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    MINUS           reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    IF              reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+    INT             reduce using rule 20 (newone -> ID ASSIGN ID MINUS ID STATETER stmts .)
+
+
+state 138
+
+    (25) followint -> COMMA ID ASSIGN NUMBER followint .
+
+    STATETER        reduce using rule 25 (followint -> COMMA ID ASSIGN NUMBER followint .)
+
+
+state 139
+
+    (30) followfloat -> COMMA ID ASSIGN NUMBER followfloat .
+
+    STATETER        reduce using rule 30 (followfloat -> COMMA ID ASSIGN NUMBER followfloat .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for OPENFLR in state 16 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 16 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 16 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 16 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 16 resolved as shift
+WARNING: shift/reduce conflict for ID in state 16 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 16 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 16 resolved as shift
+WARNING: shift/reduce conflict for IF in state 16 resolved as shift
+WARNING: shift/reduce conflict for INT in state 16 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 20 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 20 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 20 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 20 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 20 resolved as shift
+WARNING: shift/reduce conflict for ID in state 20 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 20 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 20 resolved as shift
+WARNING: shift/reduce conflict for IF in state 20 resolved as shift
+WARNING: shift/reduce conflict for INT in state 20 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 25 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 25 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 25 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 25 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 25 resolved as shift
+WARNING: shift/reduce conflict for ID in state 25 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for IF in state 25 resolved as shift
+WARNING: shift/reduce conflict for INT in state 25 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 28 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 28 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 28 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 28 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 28 resolved as shift
+WARNING: shift/reduce conflict for ID in state 28 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 28 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 28 resolved as shift
+WARNING: shift/reduce conflict for IF in state 28 resolved as shift
+WARNING: shift/reduce conflict for INT in state 28 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 31 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 31 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 31 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 31 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 31 resolved as shift
+WARNING: shift/reduce conflict for ID in state 31 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 31 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 31 resolved as shift
+WARNING: shift/reduce conflict for IF in state 31 resolved as shift
+WARNING: shift/reduce conflict for INT in state 31 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 33 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 33 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 33 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 33 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 33 resolved as shift
+WARNING: shift/reduce conflict for ID in state 33 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 33 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 33 resolved as shift
+WARNING: shift/reduce conflict for IF in state 33 resolved as shift
+WARNING: shift/reduce conflict for INT in state 33 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 34 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 34 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 34 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 34 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 34 resolved as shift
+WARNING: shift/reduce conflict for ID in state 34 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 34 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 34 resolved as shift
+WARNING: shift/reduce conflict for IF in state 34 resolved as shift
+WARNING: shift/reduce conflict for INT in state 34 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 37 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 47 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 47 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 47 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 47 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 47 resolved as shift
+WARNING: shift/reduce conflict for ID in state 47 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 47 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 47 resolved as shift
+WARNING: shift/reduce conflict for IF in state 47 resolved as shift
+WARNING: shift/reduce conflict for INT in state 47 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 58 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 58 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 58 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 58 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 58 resolved as shift
+WARNING: shift/reduce conflict for ID in state 58 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 58 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 58 resolved as shift
+WARNING: shift/reduce conflict for IF in state 58 resolved as shift
+WARNING: shift/reduce conflict for INT in state 58 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 82 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 82 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 82 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 82 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 82 resolved as shift
+WARNING: shift/reduce conflict for ID in state 82 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 82 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 82 resolved as shift
+WARNING: shift/reduce conflict for IF in state 82 resolved as shift
+WARNING: shift/reduce conflict for INT in state 82 resolved as shift
+WARNING: shift/reduce conflict for LOGOP in state 116 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 128 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 128 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 128 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 128 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 128 resolved as shift
+WARNING: shift/reduce conflict for ID in state 128 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 128 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 128 resolved as shift
+WARNING: shift/reduce conflict for IF in state 128 resolved as shift
+WARNING: shift/reduce conflict for INT in state 128 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 129 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 129 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 129 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 129 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 129 resolved as shift
+WARNING: shift/reduce conflict for ID in state 129 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 129 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 129 resolved as shift
+WARNING: shift/reduce conflict for IF in state 129 resolved as shift
+WARNING: shift/reduce conflict for INT in state 129 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 130 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 130 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 130 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 130 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 130 resolved as shift
+WARNING: shift/reduce conflict for ID in state 130 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 130 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 130 resolved as shift
+WARNING: shift/reduce conflict for IF in state 130 resolved as shift
+WARNING: shift/reduce conflict for INT in state 130 resolved as shift
+WARNING: shift/reduce conflict for OPENFLR in state 131 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 131 resolved as shift
+WARNING: shift/reduce conflict for PRINTF in state 131 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 131 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 131 resolved as shift
+WARNING: shift/reduce conflict for ID in state 131 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 131 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 131 resolved as shift
+WARNING: shift/reduce conflict for IF in state 131 resolved as shift
+WARNING: shift/reduce conflict for INT in state 131 resolved as shift
+WARNING: reduce/reduce conflict in state 59 resolved using rule (declareint -> ID ASSIGN NUMBER)
+WARNING: rejected rule (decfloat -> ID ASSIGN NUMBER) in state 59
+WARNING: reduce/reduce conflict in state 59 resolved using rule (followint -> <empty>)
+WARNING: rejected rule (declareint -> ID ASSIGN NUMBER) in state 59
+WARNING: Rule (decfloat -> ID ASSIGN NUMBER) is never reduced
+WARNING: Rule (declareint -> ID ASSIGN NUMBER) is never reduced
